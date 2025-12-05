@@ -1,33 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Rohan!</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="birthday_message_script.js"></script>
-
-    <audio src="birthday_song.mpeg" autoplay loop></audio>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Test Typing</title>
+  <style>
+    body{background:#0b0b12;color:#eaf6ff;font-family:system-ui,Arial;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+    .typing-box-container{background:rgba(255,255,255,0.03);padding:20px;border-radius:12px;min-width:320px;text-align:center}
+    .dynamic-message-text{font-size:20px;line-height:1.4;min-height:28px}
+    .cyan-text{color:#7ef1ff}
+    .pink-text{color:#ff8bd6}
+  </style>
 </head>
+<body>
+  <div class="typing-box-container">
+    <h1><span class="cyan-text">HAPPY</span> <span class="pink-text">BIRTHDAY!</span></h1>
+    <p id="typed-message" class="dynamic-message-text"></p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const el = document.getElementById('typed-message');
+      const messages = [
+        "Hey Rohan — hope your day is full of smiles!",
+        "Wishing you lots of cake, fun & success 🎂",
+        "From Ani — have the happiest birthday!"
+      ];
+      let msgIndex = 0, charIndex = 0;
+      const typingSpeed = 45;
+      const pause = 1100;
+      function step(){
+        const current = messages[msgIndex];
+        if (charIndex <= current.length){
+          el.textContent = current.slice(0,charIndex);
+          charIndex++;
+          setTimeout(step, typingSpeed);
+        } else {
+          setTimeout(()=>{ charIndex = 0; msgIndex=(msgIndex+1)%messages.length; step(); }, pause);
+        }
+      }
+      step();
+    });
+  </script>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Happy Birthday, My Bestie!</title>
+
+  <link rel="stylesheet" href="style.css"> 
+
+  </head>
 <body class="message-page">
+    <audio src="birthday_song.mpeg" autoplay loop></audio> 
 
-    <div id="confetti-container"></div>
-    
-    <main class="neon-message-container">
-        
-        <h1 class="message-heading large-heading">
-            <span class="cyan-text">HAPPY</span> <span class="pink-text">BIRTHDAY!</span>
-        </h1>
-
-        <div class="typing-box-container">
-            <p id="typed-message" class="dynamic-message-text"></p>
-        </div>
-
-        <div class="best-callout">
-            <h2 class="cyan-text">You're the Best!</h2>
-        </div>
-        
-    </main>
-
-</body>
+  </body>
 </html>
